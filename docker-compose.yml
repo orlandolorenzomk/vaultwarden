@@ -1,0 +1,27 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    volumes:
+      - ./data:/data
+    ports:
+      - "127.0.0.1:8888:80"
+    restart: unless-stopped
+    environment:
+      - SIGNUPS_ALLOWED=false            # Set to true when registering first user
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+    restart: unless-stopped
+    depends_on:
+      - vaultwarden
+
+volumes:
+  caddy_data:

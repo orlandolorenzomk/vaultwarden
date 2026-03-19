@@ -7,7 +7,9 @@ Self-hosted Bitwarden-compatible password manager.
 docker compose up -d
 ```
 
-Access via the Bitwarden desktop app — set server URL to `https://localhost`.
+Access via:
+- Bitwarden desktop/mobile app — set server URL to `https://localhost`
+- Web vault — open `https://localhost` in your browser
 
 ## First run
 
@@ -18,7 +20,7 @@ Access via the Bitwarden desktop app — set server URL to `https://localhost`.
 docker cp caddy:/data/caddy/pki/authorities/local/root.crt .
 sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain root.crt
 ```
-4. Register your account in the Bitwarden desktop app
+4. Register your account via the Bitwarden app or `https://localhost`
 5. Set `SIGNUPS_ALLOWED=false` and restart: `docker compose up -d`
 
 ## Backup
